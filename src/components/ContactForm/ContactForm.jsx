@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contactSlice/contactSlice';
+import { addContact } from 'redux/operations';
 import { nanoid } from '@reduxjs/toolkit';
 
 import contactFormStyles from './ContactForm.module.css';
@@ -13,7 +13,8 @@ const INITIAL_FORM_DATA = {
 
 
 const ContactForm = () => {
-  const contacts = useSelector((state) => state.contacts);
+  const { contactsItem } = useSelector(state => state.contacts);
+  console.log(contactsItem);
 
   const [formData, setFormData] = useState(INITIAL_FORM_DATA);
   const dispatch = useDispatch();
@@ -35,7 +36,7 @@ const ContactForm = () => {
    };
 
    if (
-     contacts.find(
+     contactsItem.find(
        contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
      )
    ) {
